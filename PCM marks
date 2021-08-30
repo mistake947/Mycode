@@ -1,0 +1,63 @@
+https://practice.geeksforgeeks.org/problems/marks-of-pcm2529/1#
+
+
+Sort the students in Ascending order of their Physics marks.
+Once this is done, sort the students having same marks in Physics in the descending order of their Chemistry marks.
+Once this is also done, sort the students having same marks in Physics and Chemistry in the ascending order of their Maths marks.
+
+
+
+we first need to create a mapping between all 3 marks of a student.
+for that I have used a vector of size 3.
+
+then sort it.
+Use a comparator function to sort.. comparison will be happening between 2 vectors of length 3.
+
+Finally, map the sorted values back to each array as it is a void function.
+
+Logic for comparator :-
+
+If
+physics marks different, ascending
+else
+if chemistry marks different, descending
+else
+maths marks ascending.
+
+code:-
+
+static bool cmp(vector<int> a, vector<int> b)
+{
+if(a[0] == b[0])
+{
+if(a[1] == b[1])
+{
+return a[2] < b[2];
+}
+else
+return a[1] > b[1];
+}
+else
+return a[0] < b[0];
+}
+void customSort (int phy[], int chem[], int math[], int N)
+{
+// your code here
+vector<vector<int>> res;
+for(int i = 0; i < N; i++)
+{
+vector<int> temp;
+temp.push_back(phy[i]);
+temp.push_back(chem[i]);
+temp.push_back(math[i]);
+res.push_back(temp);
+}
+
+sort(res.begin(), res.end(), cmp);
+for(int i = 0; i < res.size(); i++)
+{
+phy[i] = res[i][0];
+chem[i] = res[i][1];
+math[i] = res[i][2];
+}
+}
