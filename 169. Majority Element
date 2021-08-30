@@ -1,0 +1,86 @@
+  Given an array nums of size n, return the majority element.
+  
+  https://leetcode.com/problems/majority-element/submissions/
+
+The majority element is the element that appears more than ⌊n / 2⌋ times. You may assume that the majority element always exists in the array.
+
+Input: nums = [2,2,1,1,1,2,2]
+Output: 2
+
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        unordered_map<int,int>mp;
+        int n=nums.size();
+        for(int i=0;i<n;i++)
+        {
+            mp[nums[i]]++;
+            if(mp[nums[i]]>n/2)
+            {
+                return nums[i];                              size lag raha hai 
+                                                              constant space mai krne ki try kro
+                break;
+            }
+        }
+        return -1;
+        
+    }
+};
+
+
+
+
+Moore Voting Algorithm
+
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        int counter = 0, majority;
+        for (int num : nums) {
+            if (!counter) {
+                majority = num;
+            }
+            counter += num == majority ? 1 : -1;
+        }
+        return majority;
+    }
+};
+
+
+     **this is my code**
+
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        int count=1;
+        int num=nums[0];
+        for(int i=1;i<nums.size();i++)
+        {
+            if(num!=nums[i])
+            {
+                count--;
+                if(count<0)                                    0(N)  agr equal hai to count ko badhao agr equal nahi hai to count ko ghatao agr count 0 se bhi kam aa jaye to naya 
+                                                                 elenmeny aaye use naya majorty banao or most*** important uska count 1 krna hai
+                {
+                    num=nums[i];
+                    count=1;
+                }
+                
+            }
+            else
+            {
+                count++;
+            }
+        }
+        if(count>0)
+       return num;
+        else 
+            return -1;
+        
+        
+    }
+};
+
+
+
+
